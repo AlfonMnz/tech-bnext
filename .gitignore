@@ -1,3 +1,9 @@
+# ToDo
+ToDo
+
+#JetBrains config folder
+.idea
+
 # Logs
 logs
 *.log
