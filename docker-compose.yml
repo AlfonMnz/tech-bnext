@@ -1,4 +1,17 @@
 version: "3.8"
 services:
+  app:
+    build:
+      context: .
+      dockerfile: DockerFile
+    environment:
+      MONGO_STRING: "mongodb://db:27017/bnext"
+    depends_on:
+      - db
+    ports:
+      - 80:3000
+    volumes:
+      - .:/usr/src
+      - /usr/src/node_modules
   db:
     image: mongo

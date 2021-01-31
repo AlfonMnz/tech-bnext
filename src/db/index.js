@@ -8,6 +8,8 @@ mongoose.connect(process.env.MONGO_STRING || 'mongodb://localhost/bnext', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 	useFindAndModify: true
+}, () => {
+	console.log('DATABASE STATUS [OK]')
 });
 
 const userDb = makeUserDb(UserModel);

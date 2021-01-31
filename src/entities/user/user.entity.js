@@ -10,7 +10,7 @@
  * @memberOf Entities.UserEntity.buildMakeUser
  * @returns {function({JSON} userData The data of the user): {userData: {JSON}}
  */
-export default function buildMakeUser(sanitize) {
+export default function buildMakeUser() {
 	/**
 	 * Function to valid and make a user entity
 	 * @param {JSON} userData The data of an user
@@ -22,8 +22,6 @@ export default function buildMakeUser(sanitize) {
 		if (!userData.name) throw new Error('Name is required');
 		if (!userData.lastName) throw new Error('Lastname is required');
 		if (!userData.phone) throw new Error('Phone is required');
-		userData.name = sanitize(userData.name).trim();
-		userData.lastName = sanitize(userData.lastName).trim();
 		return userData
 
 	}
