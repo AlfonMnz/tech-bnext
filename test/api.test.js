@@ -40,6 +40,7 @@ describe('POST api/user/add', () => {
 	});
 	it('Trying to insert an user with invalid phone', (done) => {
 		let data = utils.copyObject(userData);
+		data.name = utils.makeRandomString(6);
 		data.phone = '888777441'
 		request(app)
 			.post('/api/user/add')

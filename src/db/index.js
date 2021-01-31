@@ -1,5 +1,7 @@
 import makeUserDb from "./handler/user.db";
+import makeContactDb from "./handler/contact.db";
 import UserModel from "./models/user.model";
+import ContactModel from "./models/contact.model";
 import mongoose from "mongoose";
 
 mongoose.connect(process.env.MONGO_STRING || 'mongodb://localhost/bnext', {
@@ -9,5 +11,6 @@ mongoose.connect(process.env.MONGO_STRING || 'mongodb://localhost/bnext', {
 });
 
 const userDb = makeUserDb(UserModel);
+const contactDb = makeContactDb(ContactModel);
 
-export {userDb};
+export {userDb, contactDb};
