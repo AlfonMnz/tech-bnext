@@ -20,9 +20,9 @@ describe('POST api/user/add', () => {
 			.expect(201)
 			.end(function (err, res) {
 				if (err) done(err)
-				expect(res.message).to.be("String")
-				expect(res.message).to.be.equal("User created correctly")
-				expect(res.data.__v).to.be.equal(0);
+				expect(res.body.message).to.be.equal("User created correctly")
+				expect(res.body.data.__v).to.be.equal(0);
+				done();
 			});
 	})
 })

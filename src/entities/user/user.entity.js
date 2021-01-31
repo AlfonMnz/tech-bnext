@@ -10,7 +10,7 @@
  * @memberOf Entities.UserEntity.buildMakeUser
  * @returns {function({JSON} userData The data of the user): {userData: {JSON}}
  */
-export default function buildMakeUser() {
+export default function buildMakeUser(axios) {
 	/**
 	 * Function to valid and make a user entity
 	 * @param {JSON} userData The data of an user
@@ -24,6 +24,10 @@ export default function buildMakeUser() {
 		if (!userData.phone) throw new Error('Phone is required');
 		//@todo Make phone validation with API
 		return userData
+
+	}
+
+	async function validatePhone(userPhone) {
 
 	}
 }
