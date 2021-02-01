@@ -26,5 +26,35 @@ export default function makeContactController(addContactUC) {
 		}
 	}
 
-	return {addContact}
+	async function addContacts(httpRequest) {
+		try {
+			const data = httpRequest.body;
+			const contacts = data.contacts;
+			for (let contact of contacts) {
+				await addContactUC(contact, data.userId)
+			}
+			return {
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				status: 201,
+				data: {
+					message: "Contacts created correctly",
+					data: contacts
+				}
+			}
+		} catch (e) {
+			return {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				status: 400,
+				data: {
+					message: e.message
+				}
+			}
+		}
+	}
+
+	return {addContact, addContacts}
 }

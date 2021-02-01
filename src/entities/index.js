@@ -5,7 +5,6 @@
 
 import buildMakeUser from "./user/user.entity";
 import buildMakeContact from "./contact/contact.entity";
-import sanitize from 'sanitize';
 
 const makeUser = buildMakeUser();
 const makeContact = buildMakeContact();

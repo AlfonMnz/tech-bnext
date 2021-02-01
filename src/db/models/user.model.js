@@ -12,6 +12,10 @@ const Schema = mongoose.Schema;
  * @property {Array<ContactEntity>} contacts The contacts of the user
  */
 const userSchema = new Schema({
+	id: {
+		type: Number,
+		required: "{PATH} is required",
+	},
 	name: {
 		type: String,
 		required: "{PATH} is required",

@@ -22,6 +22,7 @@ export default function makeUserDb(userModel) {
 			throw e;
 		}
 	}
+
 	async function addUser(user) {
 		try {
 			let newUserDb = await new userModel(user);
@@ -31,8 +32,17 @@ export default function makeUserDb(userModel) {
 		}
 	}
 
+	async function getUserById(userId, populate = 0, filter = null) {
+		try {
+			return populate ? await userModel.findOne({id: userId}, filter != null ? filter : "").populate('contacts') : await userModel.findOne({id: userId}, filter != null ? filter : "");
+		} catch (e) {
+			throw e;
+		}
+	}
+
 	return {
 		getUserByName,
-		addUser
+		addUser,
+		getUserById,
 	}
 }
