@@ -12,20 +12,16 @@ import {checkPhoneUC} from "../index";
  * @returns {function(*=): Promise<*|undefined>}
  */
 export default function makeAddUserUC(userDb) {
-	/**
-	 * Function to add an user on DB
-	 * First make an user entity, then check if exist in the DB
-	 * and if not exist insert the user in the DB
-	 * @param {JSON} userData - The data of an user
-	 * @return {UserEntity | Error}
-	 */
+
 	return async function addUserUC(userData) {
 		try {
 			const user = makeUser(userData);
 			const exists = await userDb.getUserByName(user.name);
 			if (exists) throw new Error('User already exists');
+
 			const validated = await checkPhoneUC(user.phone);
 			if (!validated) throw new Error('Must be a valid phone number');
+
 			return await userDb.addUser(user);
 		} catch (e) {
 			throw e;

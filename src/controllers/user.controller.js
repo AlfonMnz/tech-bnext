@@ -1,4 +1,6 @@
-export default function makeUserController(addUserUC, getContactsUC) {
+import {getSameContactsUC} from "../usesCases";
+
+export default function makeUserController(addUserUC, getContactsUC, getSameContacts) {
 	async function addUser(httpRequest) {
 		try {
 			const userData = httpRequest.body;
@@ -30,10 +32,9 @@ export default function makeUserController(addUserUC, getContactsUC) {
 	async function getContacts(httpRequest) {
 		try {
 			const userId = httpRequest.params.userId;
-			console.log(userId);
 			const contacts = await getContactsUC(userId);
-			return  {
-				headers:{
+			return {
+				headers: {
 					'Content-Type': 'application/json'
 				},
 				status: 200,
@@ -54,5 +55,33 @@ export default function makeUserController(addUserUC, getContactsUC) {
 		}
 	}
 
-	return {addUser, getContacts}
+	async function getSameContacts(httpRequest) {
+		try {
+			const userId1 = httpRequest.body.userId1;
+			const userId2 = httpRequest.body.userId2;
+			const contacts = await getSameContactsUC(userId1, userId2);
+			return {
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				status: 200,
+				data: {
+					data: contacts
+				}
+			}
+
+		} catch (e) {
+			return {
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				status: 400,
+				data: {
+					message: e.message
+				}
+			}
+		}
+	}
+
+	return {addUser, getContacts, getSameContacts}
 }

@@ -1,8 +1,3 @@
-/**
- * The namespace of the entities
- * @namespace Entities
- */
-
 import buildMakeUser from "./user/user.entity";
 import buildMakeContact from "./contact/contact.entity";
 

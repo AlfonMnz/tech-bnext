@@ -8,9 +8,10 @@ export default function expressCallback(controller, controllerFunction) {
 				ip: req.ip,
 				method: req.method,
 				path: req.path,
-				headers: req.headers
+				headers: req.headers,
 			}
 			const response = await controller[controllerFunction](httpRequest);
+
 			res.set(response.headers)
 			res.status(response.status).json(response.data);
 		} catch (e) {

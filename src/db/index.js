@@ -12,7 +12,7 @@ mongoose.connect(process.env.MONGO_STRING || 'mongodb://localhost/bnext', {
 	console.log('DATABASE STATUS [OK]')
 });
 
-const userDb = makeUserDb(UserModel);
+const userDb = makeUserDb(UserModel, mongoose.Types.ObjectId);
 const contactDb = makeContactDb(ContactModel);
 
 export {userDb, contactDb};

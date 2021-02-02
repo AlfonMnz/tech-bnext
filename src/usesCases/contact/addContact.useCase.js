@@ -5,6 +5,7 @@ import {addContactToUserUC} from "../index";
 export default function makeAddContactUC(contactDb) {
 	return async function addContactUC(contactData, userId) {
 		try {
+			if (!userId) throw new Error('UserId is required');
 			if (typeof userId != "number") throw new Error('UserId must be integer');
 			const contact = makeContact(contactData);
 			const validated = await checkPhoneUC(contact.phone);
