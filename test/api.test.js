@@ -83,9 +83,11 @@ describe('POST api/contacts/addContacts', () => {
 			.expect(201)
 			.end(function (err, res) {
 				if (err) done(err)
+
 				expect(res.body.message).to.be.equal("Contacts created correctly");
 				expect(res.body.data[0].contactName).to.be.equal(contactsData.contacts[0].contactName);
 				expect(res.body.data[0].phone).to.be.equal(contactsData.contacts[0].phone);
+
 				expect(res.body.data[1].contactName).to.be.equal(contactsData.contacts[1].contactName);
 				expect(res.body.data[1].phone).to.be.equal(contactsData.contacts[1].phone);
 				done();
@@ -139,3 +141,35 @@ describe('POST api/contacts/addContacts', () => {
 
 
 })
+describe('GET api/users/contacts/', () => {
+	it ("Get contact of an user", (done) => {
+		const userId = 1;
+		request(app)
+			.get('/api/user/contacts/'+userId)
+			.set("Accept", "application/json")
+			.expect("Content-Type", /json/)
+			.expect(200)
+			.end(function(err,res){
+				if (err) done(err)
+				expect(res.body.data.contacts[0].contactName).to.be.equal(contactsData.contacts[0].contactName);
+				expect(res.body.data.contacts[0].phone).to.be.equal(contactsData.contacts[0].phone);
+
+				expect(res.body.data.contacts[1].contactName).to.be.equal(contactsData.contacts[1].contactName);
+				expect(res.body.data.contacts[1].phone).to.be.equal(contactsData.contacts[1].phone);
+				done();
+			})
+	});
+	it("Trying to get an user with non exists id", (done) => {
+		const userId = 619;
+		request(app)
+			.get('/api/user/contacts/'+userId)
+			.set("Accept", "application/json")
+			.expect("Content-Type", /json/)
+			.expect(400)
+			.end(function(err,res){
+				if (err) done(err)
+				expect(res.body.message).to.be.equal("User not found");
+				done();
+			})
+	});
+});
